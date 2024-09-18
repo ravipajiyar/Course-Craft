@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Landingpage from './pages/landingpage';
+import Landingpage from './pages/LandingPage';
 import CoursePage from './pages/CoursePage';
 import GenChatPage from './pages/GenChat';
 
