@@ -9,11 +9,11 @@ api_key = os.getenv("TOGETHER_API_KEY")
 print(api_key)
 # Initialize the Together client
 client = Together(api_key=api_key)
+model = "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo"
 
 
 # Function to generate questions based on a topic
 def generate_questions(topic):
-    model = "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo"
     system_instruction = """You are a helpful assistant designed to generate subjective questions based on a given topic. 
 You should categorize the questions into three difficulty levels: basic, intermediate, and advanced. Each category should contain questions that match the difficulty level appropriately."""
     # Define the prompt for generating questions
@@ -52,3 +52,4 @@ You should categorize the questions into three difficulty levels: basic, interme
 
     json_string = questions[start_index:end_index]
     return json_string
+
