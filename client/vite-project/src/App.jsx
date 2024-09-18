@@ -6,21 +6,24 @@ import CoursePage from './pages/CoursePage';
 import GenChatPage from './pages/GenChat';
 import ViewCoursesPage from './pages/ViewCourses';
 import CourseContent from './pages/CourseContent';
+import { UserProvider } from './contexts/Usercontext';
 
 function App() {
   return (
     <div className=" bg-black  h-screen text-white">
-      <ChatProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/course" element={<CoursePage />} />
-            <Route path="/genchat" element={<GenChatPage />} />
-            <Route path="/courselist" element={<ViewCoursesPage />} />
-            <Route path="/coursecontent" element={<CourseContent />} />
-          </Routes>
-        </BrowserRouter>
-      </ChatProvider>
+      <UserProvider>
+        <ChatProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/course" element={<CoursePage />} />
+              <Route path="/genchat" element={<GenChatPage />} />
+              <Route path="/courselist" element={<ViewCoursesPage />} />
+              <Route path="/coursecontent" element={<CourseContent />} />
+            </Routes>
+          </BrowserRouter>
+        </ChatProvider>
+      </UserProvider>
     </div>
   );
 }
