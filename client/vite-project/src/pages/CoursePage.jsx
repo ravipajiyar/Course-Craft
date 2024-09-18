@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import { FaArrowDown } from 'react-icons/fa6';
@@ -110,6 +111,14 @@ const CoursePage = () => {
           ))}
         </div>
       </div>
+=======
+import Navbar from '../components/Navbar/Navbar';
+
+const CoursePage = () => {
+  return (
+    <div className="flex flex-col  bg-gray-200">
+      <Navbar />
+>>>>>>> 7e0c260b7bfa701cf8a0316fad474d60d13d6d50
     </div>
   );
 };
