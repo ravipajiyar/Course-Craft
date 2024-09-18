@@ -1,12 +1,20 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function CourseSelector() {
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState(''); // State to store input value
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Navigate to Chat AI page after form submission
-    navigate('/genchat');
+    if (inputValue.trim()) {
+      navigate('/genchat');
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value); // Update state when input changes
   };
 
   return (
@@ -20,6 +28,8 @@ export default function CourseSelector() {
             Enter the topic you wish to learn:
             <input
               type="text"
+              value={inputValue} // Bind the input value to state
+              onChange={handleInputChange} // Call the change handler on input change
               placeholder="e.g., AI, Data Science, C++"
               className="mt-3 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-300"
             />
@@ -27,7 +37,12 @@ export default function CourseSelector() {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-purple-700 text-white font-bold w-32 h-12 rounded-lg hover:bg-purple-600 transition duration-300 transform hover:scale-105"
+              disabled={!inputValue.trim()} // Disable button if input is empty
+              className={`w-32 h-12 rounded-lg font-bold transform transition duration-300 ${
+                inputValue.trim()
+                  ? 'bg-purple-700 text-white hover:bg-purple-600 hover:scale-105'
+                  : 'bg-gray-400 text-white cursor-not-allowed'
+              }`}
             >
               Next
             </button>
