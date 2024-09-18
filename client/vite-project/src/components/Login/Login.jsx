@@ -1,9 +1,43 @@
 import { useState } from 'react';
+import axios from 'axios';
+import { useUser } from '../../contexts/Usercontext'; // Import the context to use login function
 
 const Login = ({ close }) => {
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { login } = useUser(); // Get the login function from UserContext
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your custom authentication logic here
+
+    try {
+      // Send the login request to the backend
+      console.log({
+        email,
+        password,
+      });
+      const response = await axios.post(
+        'http://127.0.0.1:3000/api/user/login',
+        {
+          email,
+          password,
+        }
+      );
+
+      // If successful, store the token in localStorage
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+
+      // Get user data from the token and store it in context
+      await login(response.data.user);
+
+      // Close the login modal
+      close();
+    } catch (err) {
+      console.log(err);
+      setError('Invalid login credentials. Please try again.');
+    }
   };
 
   return (
@@ -31,7 +65,9 @@ const Login = ({ close }) => {
             <input
               type="email"
               placeholder="example@email.com"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition duration-300"
+              className="w-full p-3 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition duration-300"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -44,10 +80,15 @@ const Login = ({ close }) => {
             <input
               type="password"
               placeholder="••••••••"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition duration-300"
+              className="w-full p-3 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition duration-300"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
+
+          {/* Error Message */}
+          {error && <p className="text-red-500 mb-4">{error}</p>}
 
           {/* Submit Button */}
           <div className="flex justify-center">

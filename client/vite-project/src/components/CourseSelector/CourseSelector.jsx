@@ -24,7 +24,7 @@ export default function CourseSelector() {
           What do you want to learn?
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6 w-full text-center">
-          <label className="block text-gray-700 font-semibold text-lg">
+          <label className="block text-purple-800 font-semibold text-lg">
             Enter the topic you wish to learn:
             <input
               type="text"

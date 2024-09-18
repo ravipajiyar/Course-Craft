@@ -17,7 +17,7 @@ function UserProvider({ children }) {
     const token = localStorage.getItem('token');
     console.log(token);
     const res = await axios.get(
-      `http://127.0.0.1:8000/api/v2/user/token/${token}`
+      `http://127.0.0.1:3000/api/v2/user/token/${token}`
     );
     setUser(res.data.user);
   }
