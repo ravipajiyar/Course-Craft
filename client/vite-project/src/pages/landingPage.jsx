@@ -1,3 +1,5 @@
+import Navbar from '../components/Navbar/Navbar';
+
 export default function Landingpage() {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +30,11 @@ export default function Landingpage() {
           </div>
         </form>
       </div>
+    </div>
+  );
+  return (
+    <div>
+      <Navbar />
     </div>
   );
 }
