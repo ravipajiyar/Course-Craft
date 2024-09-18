@@ -1,74 +1,66 @@
-import { useState, useEffect, useRef } from 'react';
-import { useChat } from '../../contexts/ChatAIcontext';
-import ChatAImessage from './ChatAImessage';
+import React, { useState } from 'react';
 
-export default function ChatAI() {
-  const { messages, sendMessage, joinRoom, userId } = useChat();
-  const [input, setInput] = useState('');
-  const hasJoined = useRef(false);
-  const messagesEndRef = useRef(null);
+const ChatAI = () => {
+  // Array of questions and answers
+  const questions = [
+    {
+      question: 'What is the capital of France?',
+      answer: 'The capital of France is Paris.',
+    },
+    {
+      question: 'What is 2 + 2?',
+      answer: '2 + 2 is 4.',
+    },
+    {
+      question: 'What is the largest planet in our solar system?',
+      answer: 'The largest planet is Jupiter.',
+    },
+  ];
 
-  useEffect(() => {
-    if (!hasJoined.current) {
-      joinRoom('cosmic-lounge');
-      hasJoined.current = true;
-    }
-  }, [joinRoom]);
+  // State to keep track of the current question index
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [userAnswers, setUserAnswers] = useState(
+    Array(questions.length).fill('')
+  );
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  // Handle textarea input
+  const handleInputChange = (e) => {
+    const newAnswers = [...userAnswers];
+    newAnswers[currentQuestion] = e.target.value;
+    setUserAnswers(newAnswers);
+  };
 
-  const handleSend = (e) => {
-    e.preventDefault();
-    if (input.trim()) {
-      sendMessage(input);
-      setInput('');
-    }
+  // Handler for the "Next" button
+  const handleNext = () => {
+    setCurrentQuestion((prev) => (prev + 1) % questions.length);
   };
 
   return (
-    <div className="w-full h-[90vh] flex items-center justify-center bg-gray-300 p-10">
-      <div className="w-full max-w-6xl bg-white shadow-xl rounded-lg overflow-hidden">
-        {' '}
-        {/* Increase width with 'max-w-6xl' */}
-        <div className="flex flex-col h-[500px]">
-          {' '}
-          {/* Reduce height here */}
-          <div className="flex-grow overflow-y-auto p-4">
-            {messages.map((item, i) => (
-              <ChatAImessage
-                key={i}
-                senderId={item.senderId}
-                userName={item.username}
-                content={item.content}
-                classs={item.senderId === userId ? 'right' : 'left'}
-                currentUserId={userId}
-              />
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-          <form onSubmit={handleSend} className="border-t border-gray-300 p-3">
-            {' '}
-            {/* Increased padding */}
-            <div className="flex space-x-3">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type your message..."
-                className="flex-grow py-2 px-4 bg-white border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-              />
-              <button
-                type="submit"
-                className="bg-purple-700 text-white rounded-lg px-6 py-2 font-medium hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-              >
-                Send
-              </button>
-            </div>
-          </form>
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-lg p-6 text-center w-96 h-2/3 flex flex-col">
+        <h1 className="text-black text-2xl mb-8">Answer The Following</h1>
+        <h2 className="text-xl font-semibold mb-4 text-black">
+          {questions[currentQuestion].question}
+        </h2>
+
+        <textarea
+          id="message"
+          rows="4"
+          className="block p-2.5 w-full text-sm text-gray-700 bg-white rounded-lg border border-gray-300 focus:ring-blue-400 focus:border-blue-400 placeholder-gray-500 mt-6"
+          placeholder="Answer Here"
+        ></textarea>
+
+        <div className="flex flex-col h-full justify-end">
+          <button
+            onClick={handleNext}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-7"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ChatAI;
