@@ -28,9 +28,13 @@ export default function ChatAI() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-4xl bg-white shadow-xl rounded-lg overflow-hidden">
-        <div className="flex flex-col h-[600px]">
+    <div className="w-full h-[90vh] flex items-center justify-center bg-gray-300 p-10">
+      <div className="w-full max-w-6xl bg-white shadow-xl rounded-lg overflow-hidden">
+        {' '}
+        {/* Increase width with 'max-w-6xl' */}
+        <div className="flex flex-col h-[500px]">
+          {' '}
+          {/* Reduce height here */}
           <div className="flex-grow overflow-y-auto p-4">
             {messages.map((item, i) => (
               <ChatAImessage
@@ -44,8 +48,9 @@ export default function ChatAI() {
             ))}
             <div ref={messagesEndRef} />
           </div>
-
-          <form onSubmit={handleSend} className="border-t border-gray-200 p-4">
+          <form onSubmit={handleSend} className="border-t border-gray-300 p-3">
+            {' '}
+            {/* Increased padding */}
             <div className="flex space-x-3">
               <input
                 type="text"

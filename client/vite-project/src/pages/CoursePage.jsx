@@ -11,7 +11,7 @@ const CourseModule = ({ module }) => {
   };
 
   return (
-    <div className="bg-gray-100 shadow-sm rounded-md p-4 mb-4">
+    <div className="bg-gray-300 shadow-sm rounded-md p-4 mb-4">
       <div className="flex justify-between items-center">
         <h4 className="text-lg font-semibold text-purple-700 mb-1">
           {module.title}

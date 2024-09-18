@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar/Navbar';
 
 const GenChatPage = () => {
   return (
-    <div className="chagpage flex flex-col gap-2 bg-gray-200">
+    <div className="chagpage flex flex-col  bg-gray-300">
       <Navbar />
       <ChatAI />
     </div>
