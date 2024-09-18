@@ -45,9 +45,9 @@ You should categorize the questions into three difficulty levels: basic, interme
 
     # Print the generated questions
     questions = output['choices'][0]['text']
-    print("Generated Questions:\n", questions)
-    return questions
 
-# Example usage
-topic = "C++ Programming"
-generate_questions(topic)
+    start_index = questions.find("{")
+    end_index = questions.rfind("}")+1
+
+    json_string = questions[start_index:end_index]
+    return json_string
