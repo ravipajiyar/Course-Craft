@@ -4,6 +4,7 @@ import Login from '../Login/Login'; // Make sure to import the Login component
 
 const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const [login, setLogin] = useState(false);
   const navigate = useNavigate(); // Initialize useNavigate
 
   return (
@@ -20,12 +21,18 @@ const Navbar = () => {
         </div>
 
         <div>
-          <button
-            className="bg-purple-700 text-white py-2 px-4 rounded hover:bg-purple-600 transition duration-300"
-            onClick={() => setShowLogin(true)}
-          >
-            Login
-          </button>
+          {!login ? (
+            <button
+              className={
+                'bg-purple-700 text-white py-2 px-4 rounded hover:bg-purple-600 transition duration-300'
+              }
+              onClick={() => setShowLogin(true)}
+            >
+              Login
+            </button>
+          ) : (
+            <p className=" text-black">Hi Sushankhya</p>
+          )}
         </div>
       </div>
       {showLogin && <Login close={() => setShowLogin(false)} />}
