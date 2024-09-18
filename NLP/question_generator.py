@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 # Set your Together AI API key directly
 api_key = os.getenv("TOGETHER_API_KEY")
+print(api_key)
 # Initialize the Together client
 client = Together(api_key=api_key)
 

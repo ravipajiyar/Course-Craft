@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
+const axios = require("axios");
 
 const signJWT = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -65,5 +66,25 @@ exports.signup = catchAsync(async (req, res, next) => {
     data: {
       user,
     },
+  });
+});
+
+exports.generateQuestions = catchAsync(async (req, res, next) => {
+  const { topic } = req.body;
+  console.log(topic);
+
+  const response = await axios.post(
+    "http://localhost:3001/generate-questions",
+    { topic: topic }
+  );
+
+  const advanced = response.data.questions.advanced;
+  const basic = response.data.questions.basic;
+  const intermediate = response.data.questions.intermediate;
+  const data = { basic, intermediate, advanced };
+
+  res.status(201).json({
+    status: "success",
+    data: data,
   });
 });
