@@ -1,1 +1,6 @@
 .venv/
+/client/vite-project/node_modules/
+/server/node_modules/
+/server/public/
+/server/config.env
+**/.DS_Store

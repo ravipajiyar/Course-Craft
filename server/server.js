@@ -10,8 +10,8 @@ const DB = process.env.DATABASE.replace(
 mongoose
   .connect(DB)
   .then((con) => {
-    console.log("Connected");
-    console.log(con);
+    console.log("Connected to database...");
+    // console.log(con);
   })
   .catch((err) => {
     console.log(err);
@@ -19,5 +19,5 @@ mongoose
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
-  console.log("Listening");
+  console.log(`Listening on port ${port}`);
 });
