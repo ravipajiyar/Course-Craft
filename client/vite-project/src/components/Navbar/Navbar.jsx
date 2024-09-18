@@ -14,7 +14,7 @@ const Navbar = () => {
 
         <div>
           <button
-            className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition duration-300"
+            className="bg-purple-700 text-white py-2 px-4 rounded hover:bg-purple-600 transition duration-300"
             onClick={() => setShowLogin(true)}
           >
             Login
