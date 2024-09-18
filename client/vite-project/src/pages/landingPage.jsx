@@ -1,14 +1,13 @@
 import Navbar from '../components/Navbar/Navbar';
-
 export default function Landingpage() {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   return (
-    <div className="flex flex-col">
+    <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 p-4">
+      <div className="flex flex-col items-center justify-center bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 h-screen p-4">
         <div className="bg-white p-10 rounded-xl shadow-2xl max-w-md w-3/5 h-3/4 flex flex-col justify-center items-center space-y-6">
           <h1 className="text-black text-center font-bold text-3xl mb-4">
             What do you want to learn?
@@ -36,6 +35,6 @@ export default function Landingpage() {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
