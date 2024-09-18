@@ -51,7 +51,7 @@ const Login = ({ close }) => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-black text-white w-full py-3 rounded-lg font-semibold text-lg hover:bg-gray-800 transition duration-300"
+              className="bg-purple-700 text-white w-full py-3 rounded-lg font-semibold text-lg hover:bg-purple-600 transition duration-300"
             >
               Login
             </button>

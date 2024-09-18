@@ -27,7 +27,7 @@ export default function CourseSelector() {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-black text-white font-bold w-32 h-12 rounded-lg hover:bg-gray-800 transition duration-300 transform hover:scale-105"
+              className="bg-purple-700 text-white font-bold w-32 h-12 rounded-lg hover:bg-purple-600 transition duration-300 transform hover:scale-105"
             >
               Next
             </button>
