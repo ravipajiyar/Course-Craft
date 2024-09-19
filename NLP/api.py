@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from question_generator import generate_questions
 from question_generator_gemini import generate_questions_gemini
 from expected_answer_generator import generate_expected_answers
-from evaluate_answers import evaluate
+from generate_module import generate_module
 
 import json
 
@@ -26,7 +26,7 @@ def generate_module():
     topic = data.get("topic")
     user_answers = data.get("answers")
     exceptd_answers = generate_expected_answers(topic, questions)
-    module =  evaluate(exceptd_answers, user_answers)
+    module =  generate_module(exceptd_answers, user_answers)
 
     start_index = module.find("{")
     end_index = module.rfind("}")+1

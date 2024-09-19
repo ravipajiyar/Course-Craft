@@ -19,7 +19,7 @@ model = genai.GenerativeModel(
   model_name="gemini-1.5-flash",
   generation_config=generation_config,
   system_instruction="""
-  Task: Generate a diverse set of questions that assess the user's knowledge of a given topic. The questions should cover different difficulty levels (basic, intermediate, and advanced) and focus on various subtopics or key concepts related to the provided topic.
+  Task: Generate a diverse set of questions (2 for each levels) that assess the user's knowledge of a given topic. The questions should cover different difficulty levels (basic, intermediate, and advanced) and focus on various subtopics or key concepts related to the provided topic.
 
 Instruction:
 
