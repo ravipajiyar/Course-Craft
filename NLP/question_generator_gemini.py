@@ -67,23 +67,3 @@ def generate_questions_gemini(topic):
     formatted_json_response = json.loads(response[start_index:end_index])
     return formatted_json_response
 
-def generate_expected_answers(topic, questions):
-    system_instruction = f"""You are an expert on {topic}. Provide detailed and correct answers to the following questions:
-    {questions}
-
-        Formatting: Return the questions in the following format:
-    {{
-   "topic": "{topic},
-   "questions": {{
-      "basic": {{questions: ["<question 1>", "<question 2>", ...],
-      expected_answers: ["<answer 1>", "<answer 2>", ...]
-      }},
-      "intermediate": {{questions:["<question 1>", "<question 2>", ...],
-      expected_answers: ["<answer 1>", "<answer 2>", ...]
-      }},
-      "advanced": {{questions:["<question 1>", "<question 2>", ...],
-      expected_answers: ["<answer 1>", "<answer 2>", ...]
-      }}
-        }}
-    }}
-    """
