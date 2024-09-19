@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema(
   {
@@ -10,7 +10,7 @@ const courseSchema = new mongoose.Schema(
       {
         moduleNumber: Number,
         moduleName: String,
-        content: [String],
+        contents: [String],
       },
     ],
   },

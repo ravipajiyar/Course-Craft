@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 const axios = require("axios");
-
+const Course = require("../models/courseModel");
 const signJWT = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPRIES_IN,
@@ -86,5 +86,55 @@ exports.generateQuestions = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: "success",
     data: data,
+  });
+});
+
+exports.generateModule = catchAsync(async (req, res, next) => {
+  const { questions, answers, topic } = req.body;
+
+  const response = await axios.post("http://localhost:3001/generate-module", {
+    topic,
+    questions,
+    answers,
+  });
+
+  const course = response.data;
+
+  const courseModules = Object.keys(course.modules).map((modName, i) => {
+    return {
+      moduleNumber: i + 1,
+      moduleName: modName,
+      contents: course.modules[modName],
+    };
+  });
+
+  const courseData = {
+    title: course.course_title,
+    modules: courseModules,
+  };
+
+  const newCourse = await Course.create(courseData);
+
+  console.log("Saved course data", newCourse);
+
+  res.status(200).json({
+    status: "success",
+    course: newCourse,
+  });
+});
+
+exports.getNotes = catchAsync(async (req, res) => {
+  const { topic } = req.body;
+  const response = await axios.post("http://127.0.0.1:3001/get-notes", {
+    topic,
+  });
+  console.log(response.data);
+
+  res.status(200).json({
+    status: "success",
+    notes: {
+      topic,
+      note: response.data,
+    },
   });
 });

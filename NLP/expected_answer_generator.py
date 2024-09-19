@@ -48,7 +48,9 @@ def generate_expected_answers(topic, questions):
     ]
     )
 
+
     response = chat_session.send_message(f"{questions}").text
+
     start_index = response.find("{")
     end_index = response.rfind("}") + 1
     formatted_json_response = json.loads(response[start_index:end_index])

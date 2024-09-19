@@ -8,7 +8,7 @@ export default function CourseSelector() {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
-  const { setQuestions } = useQuestions();
+  const { setQuestions, setTopic } = useQuestions();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +28,8 @@ export default function CourseSelector() {
       ];
 
       setQuestions(res);
+      setTopic(inputValue);
+      
       navigate('/genchat');
     } catch (error) {
       console.error('Error fetching questions:', error);

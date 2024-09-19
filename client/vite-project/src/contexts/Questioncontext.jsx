@@ -6,9 +6,12 @@ export const QuestionsContext = createContext();
 // Provide the context to the rest of the app
 export const QuestionsProvider = ({ children }) => {
   const [questions, setQuestions] = useState(undefined); // State to store questions
+  const [topic, setTopic] = useState(''); // State to store questions
 
   return (
-    <QuestionsContext.Provider value={{ questions, setQuestions }}>
+    <QuestionsContext.Provider
+      value={{ questions, setQuestions, topic, setTopic }}
+    >
       {children}
     </QuestionsContext.Provider>
   );

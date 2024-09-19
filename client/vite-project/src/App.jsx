@@ -7,21 +7,24 @@ import ViewCoursesPage from './pages/ViewCourses';
 import CourseContent from './pages/CourseContent';
 import { UserProvider } from './contexts/Usercontext';
 import { QuestionsProvider } from './contexts/Questioncontext';
+import { CourseProvider } from './contexts/courseContext';
 
 function App() {
   return (
     <div className=" bg-black  h-screen text-white">
       <UserProvider>
         <QuestionsProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/course" element={<CoursePage />} />
-              <Route path="/genchat" element={<GenChatPage />} />
-              <Route path="/courselist" element={<ViewCoursesPage />} />
-              <Route path="/coursecontent" element={<CourseContent />} />
-            </Routes>
-          </BrowserRouter>
+          <CourseProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/course" element={<CoursePage />} />
+                <Route path="/genchat" element={<GenChatPage />} />
+                <Route path="/courselist" element={<ViewCoursesPage />} />
+                <Route path="/coursecontent" element={<CourseContent />} />
+              </Routes>
+            </BrowserRouter>
+          </CourseProvider>
         </QuestionsProvider>
       </UserProvider>
     </div>

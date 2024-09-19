@@ -19,12 +19,14 @@ model = genai.GenerativeModel(
   model_name="gemini-1.5-flash",
   generation_config=generation_config,
   system_instruction="""Based on the answer given by a the user, evaluate the correctness of the answers and generate a well structured course module based on user's understanding on the subject. If no answere is provided asume the user as a beginer on the subject.
+    The course content should be incremental from basics to andvanced in that order(important).
     return in following fromat:
     {
+    course_title: <title of course>,
     your_understanding: <users's understanding level>,
     modules: {
-        module 1 name: [<topic 1>, <topic 2>, ... ],
-        module 2 name: [<topic 1>, <topic 2>, ... ],
+        <module name>: [<topic 1>, <topic 2>, ... ],
+        <module name>: [<topic 1>, <topic 2>, ... ],
         ...
     }
     }
@@ -65,6 +67,7 @@ def generate_module(questions_expected_answers, user_answers):
 
 
     response = chat_session.send_message(questions_expected_user_answer).text
+    print(response)
 
     start_index = response.find("{")
     end_index = response.rfind("}")+1
