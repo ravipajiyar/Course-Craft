@@ -1,2 +1,2 @@
-# codewave_Course-Craft
-This is the repo for our codewave hackathon
+# Course-Craft
+Ai powered web app to help to generate course by analyzing knowledge gap
