@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useQuestions } from '../../contexts/Questioncontext';
 import { useCourse } from '../../contexts/courseContext';
 import { useNavigate } from 'react-router';
-import CoursePage from '../../pages/CoursePage';
 import axios from 'axios';
 import { InfinitySpin } from 'react-loader-spinner';
 
@@ -16,6 +15,12 @@ const ChatAI = () => {
   // State to keep track of the current question index
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState(Array(qsn.length).fill(''));
+  const [progress, setProgress] = useState(((currentQuestion + 1) / qsn.length) * 100);
+
+  // Update progress when current question changes
+  React.useEffect(() => {
+    setProgress(((currentQuestion + 1) / qsn.length) * 100);
+  }, [currentQuestion, qsn.length]);
 
   // Handle textarea input
   const handleInputChange = (e) => {
@@ -28,6 +33,13 @@ const ChatAI = () => {
   const handleNext = () => {
     if (currentQuestion < qsn.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
+    }
+  };
+
+  // Handler for the "Previous" button
+  const handlePrevious = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion((prev) => prev - 1);
     }
   };
 
@@ -52,48 +64,92 @@ const ChatAI = () => {
     } finally {
       setLoading(false);
     }
-
-    navigate('/course');
-
-    // Add submission logic here (e.g., send answers to a server)
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-300">
+    <div className="flex items-center justify-center min-h-screen w-full bg-transparent">
       {loading ? (
-        <InfinitySpin visible={true} width="200" color="#4fa94d" />
+        <div className="text-center">
+          <InfinitySpin visible={true} width="200" color="#ffffff" />
+          <p className="text-white mt-4 text-xl">Crafting your personalized learning journey...</p>
+        </div>
       ) : (
-        <div className="bg-white shadow-lg rounded-lg p-6 text-center w-2/4 h-2/3 flex flex-col">
-          <h1 className="text-black text-2xl mb-8">Answer The Following</h1>
-          <h2 className="text-xl font-semibold mb-4 text-purple-700">
-            {qsn[currentQuestion]}
-          </h2>
+        <div className="w-full max-w-6xl px-4 mt-12">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-white text-4xl font-bold mb-3">Customize Your Learning Path</h1>
+            <p className="text-purple-200 text-lg">
+              Help us understand your needs for <span className="font-bold">{topic || "your course"}</span>
+            </p>
+          </div>
+          
+          {/* Progress bar */}
+          <div className="w-full bg-purple-900 rounded-full h-3 mb-6">
+            <div 
+              className="bg-purple-300 h-3 rounded-full transition-all duration-500 ease-in-out" 
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+          
+          <div className="text-white text-base mb-2 text-right">
+            Question {currentQuestion + 1} of {qsn.length}
+          </div>
 
-          <textarea
-            id="message"
-            rows="15"
-            value={userAnswers[currentQuestion]} // Set value based on current answer
-            onChange={handleInputChange} // Handle input changes
-            className="block p-2.5 w-full text-sm text-gray-700 bg-white rounded-lg border border-gray-300 focus:ring-blue-400 focus:border-blue-400 placeholder-gray-500 mt-6"
-            placeholder="Answer Here"
-          ></textarea>
+          {/* Question card */}
+          <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-2xl p-10 w-full border border-purple-300 border-opacity-20 shadow-xl">
+            <h2 className="text-2xl font-semibold mb-6 text-white">
+              {qsn[currentQuestion]}
+            </h2>
 
-          <div className="flex flex-col h-full justify-end">
-            {currentQuestion < qsn.length - 1 ? (
+            <textarea
+              id="message"
+              rows="6"
+              value={userAnswers[currentQuestion]}
+              onChange={handleInputChange}
+              className="block p-5 w-full text-lg text-white bg-purple-900 bg-opacity-30 rounded-xl border border-purple-400 border-opacity-30 focus:ring-purple-500 focus:border-purple-500 placeholder-purple-300"
+              placeholder="Share your thoughts here..."
+            ></textarea>
+
+            {/* Navigation buttons */}
+            <div className="flex justify-between mt-8">
               <button
-                onClick={handleNext}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-7"
+                onClick={handlePrevious}
+                disabled={currentQuestion === 0}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 text-lg ${
+                  currentQuestion === 0
+                    ? 'bg-purple-800 text-purple-300 opacity-50 cursor-not-allowed'
+                    : 'bg-purple-700 text-white hover:bg-purple-600'
+                }`}
               >
-                Next
+                Previous
               </button>
-            ) : (
-              <button
-                onClick={handleSubmit}
-                className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-600 mb-7"
-              >
-                Generate Course Module
-              </button>
-            )}
+
+              {currentQuestion < qsn.length - 1 ? (
+                <button
+                  onClick={handleNext}
+                  className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-500 transition-all duration-300 text-lg"
+                >
+                  Next Question
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  className="px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg font-medium hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 text-lg"
+                >
+                  Generate My Course
+                </button>
+              )}
+            </div>
+          </div>
+          
+          {/* Tips */}
+          <div className="mt-8 bg-purple-900 bg-opacity-40 p-6 rounded-xl text-purple-200">
+            <h3 className="font-bold text-white mb-3 text-lg">Tips for better results:</h3>
+            <ul className="list-disc pl-6 space-y-2 text-base">
+              <li>Be specific about your current knowledge level</li>
+              <li>Mention any particular areas of interest within this topic</li>
+              <li>Share your learning goals and how you plan to apply this knowledge</li>
+            </ul>
           </div>
         </div>
       )}

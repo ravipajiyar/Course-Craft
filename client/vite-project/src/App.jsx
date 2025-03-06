@@ -8,6 +8,8 @@ import CourseContent from './pages/CourseContent';
 import { UserProvider } from './contexts/Usercontext';
 import { QuestionsProvider } from './contexts/Questioncontext';
 import { CourseProvider } from './contexts/courseContext';
+import AboutPage from './pages/About';
+import FeaturesPage from './pages/Features';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/features" element={<FeaturesPage />} />
                 <Route path="/course" element={<CoursePage />} />
                 <Route path="/genchat" element={<GenChatPage />} />
                 <Route path="/courselist" element={<ViewCoursesPage />} />

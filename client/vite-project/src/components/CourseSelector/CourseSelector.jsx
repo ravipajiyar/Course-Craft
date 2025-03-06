@@ -1,8 +1,9 @@
+// CourseSelector.jsx
 import axios from 'axios';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InfinitySpin } from 'react-loader-spinner';
-import { QuestionsContext, useQuestions } from '../../contexts/Questioncontext'; // Import the context
+import { useQuestions } from '../../contexts/Questioncontext';
 
 export default function CourseSelector() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function CourseSelector() {
 
       setQuestions(res);
       setTopic(inputValue);
-      
+
       navigate('/genchat');
     } catch (error) {
       console.error('Error fetching questions:', error);
@@ -43,39 +44,46 @@ export default function CourseSelector() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-full w-full">
       {loading ? (
-        <InfinitySpin visible={true} width="200" color="#4fa94d" />
+        <div className="text-center">
+          <InfinitySpin visible={true} width="200" color="#ffffff" />
+          <p className="mt-4 text-lg text-white">Generating your learning experience...</p>
+        </div>
       ) : (
-        <div className="bg-white py-10 px-5 rounded-xl shadow-lg w-3/5 flex flex-col justify-center items-center space-y-6">
-          <h1 className="text-black text-center font-bold text-3xl mb-4">
+        <div className="glassmorphism rounded-2xl shadow-2xl w-full md:w-3/4 flex flex-col justify-center items-center space-y-6 p-10">
+          <h1 className="text-white text-center font-bold text-4xl mb-2">
             What do you want to learn?
           </h1>
+          <p className="text-gray-200 text-center text-lg max-w-xl">
+            Enter your desired topic and let our AI craft the perfect learning journey for you.
+          </p>
           <form
             onSubmit={handleSubmit}
-            className="space-y-6 w-full text-center"
+            className="space-y-6 w-full max-w-2xl"
           >
-            <label className="block text-purple-800 font-semibold text-lg">
-              Enter the topic you wish to learn:
+            <div className="relative w-full">
               <input
                 type="text"
                 value={inputValue}
                 onChange={handleInputChange}
                 placeholder="e.g., AI, Data Science, C++"
-                className="mt-3 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-300"
+                className="w-full p-5 pr-12 rounded-xl bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-300 text-lg"
               />
-            </label>
-            <div className="flex justify-end">
+              <i className="fas fa-search absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-300"></i>
+            </div>
+            <div className="flex justify-center">
               <button
                 type="submit"
                 disabled={!inputValue.trim()}
-                className={`w-32 h-12 rounded-lg font-bold transform transition duration-300 ${
-                  inputValue.trim()
-                    ? 'bg-purple-700 text-white hover:bg-purple-600 hover:scale-105'
-                    : 'bg-gray-400 text-white cursor-not-allowed'
-                }`}
+                className={`py-4 px-8 rounded-xl font-bold text-lg transform transition duration-300 shadow-lg
+                  ${
+                    inputValue.trim()
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-purple-500/50 hover:scale-105'
+                      : 'bg-gray-700 bg-opacity-50 text-gray-400 cursor-not-allowed'
+                  }`}
               >
-                Next
+                Start Learning
               </button>
             </div>
           </form>
