@@ -1,6 +1,12 @@
 // Landingpage.jsx
 import Navbar from '../components/Navbar/Navbar';
 import CourseSelector from '../components/CourseSelector/CourseSelector';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faUserGraduate, 
+  faBrain, 
+  faChartLine 
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Landingpage() {
   return (
@@ -28,31 +34,31 @@ export default function Landingpage() {
         </div>
         
         {/* Feature Cards */}
-        <div id="features" className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-full">
-          <div className="glassmorphism rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
-              <i className="fas fa-brain text-white text-xl"></i>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Personalized Learning</h3>
-            <p className="text-gray-300">Courses tailored to your knowledge level, learning style, and goals</p>
-          </div>
-          
-          <div className="glassmorphism rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
-              <i className="fas fa-robot text-white text-xl"></i>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">AI-Powered</h3>
-            <p className="text-gray-300">Smart technology assesses your knowledge and creates optimal learning paths</p>
-          </div>
-          
-          <div className="glassmorphism rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
-              <i className="fas fa-graduation-cap text-white text-xl"></i>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Expert Guidance</h3>
-            <p className="text-gray-300">Curriculum designed by industry professionals to maximize your success</p>
-          </div>
-        </div>
+<div id="features" className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-full">
+  <div className="glassmorphism rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
+    <div className="text-5xl text-purple-300 mb-4">
+      <FontAwesomeIcon icon={faUserGraduate} />
+    </div>
+    <h3 className="text-xl font-semibold mb-2">Personalized Learning</h3>
+    <p className="text-gray-300">Courses tailored to your knowledge level, learning style, and goals</p>
+  </div>
+  
+  <div className="glassmorphism rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
+    <div className="text-5xl text-pink-300 mb-4">
+      <FontAwesomeIcon icon={faBrain} />
+    </div>
+    <h3 className="text-xl font-semibold mb-2">AI-Powered</h3>
+    <p className="text-gray-300">Smart technology assesses your knowledge and creates optimal learning paths</p>
+  </div>
+  
+  <div className="glassmorphism rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
+    <div className="text-5xl text-indigo-300 mb-4">
+      <FontAwesomeIcon icon={faChartLine} />
+    </div>
+    <h3 className="text-xl font-semibold mb-2">Expert Guidance</h3>
+    <p className="text-gray-300">Curriculum designed by industry professionals to maximize your success</p>
+  </div>
+</div>
         
         {/* Course Selector */}
         <div className="w-full">

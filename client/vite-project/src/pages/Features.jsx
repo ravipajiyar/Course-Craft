@@ -1,5 +1,14 @@
 import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faBrain, 
+  faFingerprint, 
+  faChartLine,
+  faComments, 
+  faTasks, 
+  faMedal 
+} from '@fortawesome/free-solid-svg-icons';
 
 const FeaturesPage = () => {
   return (
@@ -19,38 +28,39 @@ const FeaturesPage = () => {
         </div>
         
         {/* Key Features Section */}
-        <div className="max-w-6xl mx-auto mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "fas fa-brain",
-                title: "AI-Powered Learning",
-                description: "Our algorithms analyze your responses in real-time to create a custom learning experience tailored to your needs.",
-                color: "from-purple-400 to-purple-600"
-              },
-              {
-                icon: "fas fa-fingerprint",
-                title: "Personalized Content",
-                description: "No two learners see the same course. Content adapts to your prior knowledge, learning style, and goals.",
-                color: "from-pink-400 to-pink-600"
-              },
-              {
-                icon: "fas fa-chart-line",
-                title: "Progress Tracking",
-                description: "Detailed analytics show your growth, mastery of topics, and areas that need additional focus.",
-                color: "from-indigo-400 to-indigo-600"
-              },
-            ].map((feature, index) => (
-              <div key={index} className="glassmorphism rounded-xl p-8 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
-                <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center mb-5 shadow-lg`}>
-                  <i className={`${feature.icon} text-white text-xl`}></i>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-gray-300">{feature.description}</p>
-              </div>
-            ))}
-          </div>
+        {/* Key Features Section */}
+<div className="max-w-6xl mx-auto mb-16">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {[
+      {
+        icon: faBrain,
+        title: "AI-Powered Learning",
+        description: "Our algorithms analyze your responses in real-time to create a custom learning experience tailored to your needs.",
+        color: "from-purple-400 to-purple-600"
+      },
+      {
+        icon: faFingerprint,
+        title: "Personalized Content",
+        description: "No two learners see the same course. Content adapts to your prior knowledge, learning style, and goals.",
+        color: "from-pink-400 to-pink-600"
+      },
+      {
+        icon: faChartLine,
+        title: "Progress Tracking",
+        description: "Detailed analytics show your growth, mastery of topics, and areas that need additional focus.",
+        color: "from-indigo-400 to-indigo-600"
+      },
+    ].map((feature, index) => (
+      <div key={index} className="glassmorphism rounded-xl p-8 flex flex-col items-center text-center transform hover:scale-105 transition-all duration-300">
+        <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center mb-5 shadow-lg`}>
+          <FontAwesomeIcon icon={feature.icon} className="text-white text-xl" />
         </div>
+        <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+        <p className="text-gray-300">{feature.description}</p>
+      </div>
+    ))}
+  </div>
+</div>
         
         {/* Feature Details */}
         <div className="max-w-6xl mx-auto">
@@ -153,45 +163,45 @@ const FeaturesPage = () => {
           
           {/* Feature 3 */}
           <div className="glassmorphism rounded-xl p-8">
-            <h2 className="text-2xl font-semibold mb-6 text-center text-purple-300">Interactive Learning Experience</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white bg-opacity-10 p-6 rounded-xl hover:bg-opacity-15 transition-all">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center mr-3">
-                    <i className="fas fa-comments text-white"></i>
-                  </div>
-                  <h3 className="font-medium">AI Tutor Assistance</h3>
-                </div>
-                <p className="text-gray-300 text-sm">
-                  Get help and explanations from our AI tutor whenever you're stuck or need clarification.
-                </p>
-              </div>
-              
-              <div className="bg-white bg-opacity-10 p-6 rounded-xl hover:bg-opacity-15 transition-all">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center mr-3">
-                    <i className="fas fa-tasks text-white"></i>
-                  </div>
-                  <h3 className="font-medium">Hands-on Projects</h3>
-                </div>
-                <p className="text-gray-300 text-sm">
-                  Apply what you've learned with practical exercises and real-world projects tailored to your level.
-                </p>
-              </div>
-              
-              <div className="bg-white bg-opacity-10 p-6 rounded-xl hover:bg-opacity-15 transition-all">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center mr-3">
-                    <i className="fas fa-medal text-white"></i>
-                  </div>
-                  <h3 className="font-medium">Achievement System</h3>
-                </div>
-                <p className="text-gray-300 text-sm">
-                  Stay motivated with achievements, progress milestones, and skill certifications as you learn.
-                </p>
-              </div>
-            </div>
-          </div>
+  <h2 className="text-2xl font-semibold mb-6 text-center text-purple-300">Interactive Learning Experience</h2>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="bg-white bg-opacity-10 p-6 rounded-xl hover:bg-opacity-15 transition-all">
+      <div className="flex items-center mb-4">
+        <div className="text-green-400 text-2xl mr-3">
+          <FontAwesomeIcon icon={faComments} />
+        </div>
+        <h3 className="font-medium">AI Tutor Assistance</h3>
+      </div>
+      <p className="text-gray-300 text-sm">
+        Get help and explanations from our AI tutor whenever you're stuck or need clarification.
+      </p>
+    </div>
+    
+    <div className="bg-white bg-opacity-10 p-6 rounded-xl hover:bg-opacity-15 transition-all">
+      <div className="flex items-center mb-4">
+        <div className="text-purple-400 text-2xl mr-3">
+          <FontAwesomeIcon icon={faTasks} />
+        </div>
+        <h3 className="font-medium">Hands-on Projects</h3>
+      </div>
+      <p className="text-gray-300 text-sm">
+        Apply what you've learned with practical exercises and real-world projects tailored to your level.
+      </p>
+    </div>
+    
+    <div className="bg-white bg-opacity-10 p-6 rounded-xl hover:bg-opacity-15 transition-all">
+      <div className="flex items-center mb-4">
+        <div className="text-yellow-400 text-2xl mr-3">
+          <FontAwesomeIcon icon={faMedal} />
+        </div>
+        <h3 className="font-medium">Achievement System</h3>
+      </div>
+      <p className="text-gray-300 text-sm">
+        Stay motivated with achievements, progress milestones, and skill certifications as you learn.
+      </p>
+    </div>
+  </div>
+</div>
         </div>
         
         {/* CTA Section */}
